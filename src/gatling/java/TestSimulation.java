@@ -1,15 +1,13 @@
-import io.gatling.javaapi.core.ScenarioBuilder;
-import io.gatling.javaapi.core.Simulation;
-import io.gatling.javaapi.http.HttpProtocolBuilder;
+import static io.gatling.javaapi.core.CoreDsl.*;
+import static io.gatling.javaapi.http.HttpDsl.*;
 
-import static io.gatling.javaapi.core.CoreDsl.atOnceUsers;
-import static io.gatling.javaapi.core.CoreDsl.scenario;
-import static io.gatling.javaapi.http.HttpDsl.http;
-import static io.gatling.javaapi.http.HttpDsl.status;
+import io.gatling.javaapi.core.*;
+import io.gatling.javaapi.http.*;
 
 public class TestSimulation extends Simulation {
+    //Set up http protocol
     HttpProtocolBuilder httpProtocol = http
-            .baseUrl("https://httpbin.org") // Here is the base URL
+            .baseUrl("https://httpbin.org")
             .acceptHeader("application/json");
 
     // Scenario definition
@@ -17,12 +15,14 @@ public class TestSimulation extends Simulation {
             // GET request example
             .exec(http("GET Request")
                     .get("/get")
-                    .check(status().is(200)));
+                    .queryParam("param", "something")
+                    .check( status().is(200),
+                            bodyString().exists()));
 
     {
         // Set up the simulation with the scenario
         setUp(
-                scn.injectOpen(atOnceUsers(1)) // Define the injection profile, here it's 1 user at once
+                scn.injectOpen(atOnceUsers(1))
         ).protocols(httpProtocol);
     }
 
