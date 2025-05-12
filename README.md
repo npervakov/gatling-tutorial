@@ -34,18 +34,18 @@ For example, if we want to run simulation TestSimulation.java
 - `POST` request with a string body.
 
 ### Task 3: Real Scenario
-**Create a Scenario for CoinGecko API**
-   - go to main page
-   - get all coins
-   - get coin details for this coin
-   - go to coin website
-   - get Historical data
+**Create a Scenario for ComputerBase Api**
+- go to main page
+- get all computers 
+- POST create a new computer
+- PUT changes an existing computer
+- 
 ### Task 4: Load Profiles
 **Create Load Profiles**
    - Create different load profiles using the same scenario:
-      - 10 users
-      - Ramp users
-      - Maximum (30 users)
+      - Regular load 
+      - Find maximum 
+      - Stress test 
 
 ### Task 5: Test results
 **Create Tables in Confluence**
@@ -53,4 +53,10 @@ For example, if we want to run simulation TestSimulation.java
    - **Table 2:** Scenario Profiles with descriptions.
    - Add the Gatling report to the Confluence page.
 
+### Task 6: Home-task
+**Modify computerBase scenario**
+- POST create a new computer
+- PUT changes an existing computer
+- Add feeder to scenario  
+- Add a new load profile , ramp up with 4 steps, load during 10 min and shut down 
 
