@@ -17,8 +17,8 @@ Before starting any work, ensure the following:
 
 ## How to run simulations
 Use gatling tasks `gradlew gatlingRun` with parameters --simulation=ClassName
-For example, if we want to run simulation TestSimulation.java  
-`gradlew gatlingRun --simulation TestSimulation`
+For example, if we want to run simulation AATestSimulation.java  
+`gradlew gatlingRun --simulation AATestSimulation`
 ### Task 1: Simple scenario
 **Open the simulation example and understand basic syntax**  
    - Http protocol

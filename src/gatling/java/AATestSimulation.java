@@ -4,7 +4,7 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
-public class TestSimulation extends Simulation {
+public class AATestSimulation extends Simulation {
     //Set up http protocol
     HttpProtocolBuilder httpProtocol = http
             .baseUrl("https://httpbin.org")
