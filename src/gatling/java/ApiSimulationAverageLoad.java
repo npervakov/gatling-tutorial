@@ -6,25 +6,26 @@ import io.gatling.javaapi.http.*;
 
 public class ApiSimulationAverageLoad extends Simulation {
 
+    // Reuse login JSON payload
     private static final String LOGIN_BODY = "{\n" +
             "    \"username\": \"testuserBatman\",\n" +
             "    \"password\": \"helloworld2\"\n" +
             "}";
 
-    //Set up http protocol
+    // Set up http protocol
     HttpProtocolBuilder httpProtocol = http
             .baseUrl("http://qa-testing.in.devexperts.com:7641/api")
             .acceptHeader("application/json")
             .contentTypeHeader("application/json");
 
-    //1.
+    // 1. Get all videogames
     private final ChainBuilder getAllVideoGames = exec(
             http("Get All VideoGames ")
                     .get("/videogames")
                     .check(status().is(200))
     );
 
-    //2.
+    // 2. Login and save auth token
     private final ChainBuilder loginUser = exec(
             http("Login User")
                     .post("/auth/login")
@@ -33,6 +34,7 @@ public class ApiSimulationAverageLoad extends Simulation {
                     .check(jsonPath("$.data").saveAs("authToken"))
     );
 
+    // JSON payload for creating the new game
     private static final String CREATE_GAME_BODY = """
             {
                 "title": "Battlefield",
@@ -45,7 +47,7 @@ public class ApiSimulationAverageLoad extends Simulation {
             }
             """;
 
-    //3.
+    // 3. Create a new game
     private final ChainBuilder createVideoGame = exec(
             http("Create Video Game")
                     .post("/videogames")
@@ -55,7 +57,7 @@ public class ApiSimulationAverageLoad extends Simulation {
                     .check(jsonPath("$.data.id").saveAs("gameId"))
     );
 
-    //4.
+    // 4. Get the created game by its ID
     private final ChainBuilder getVideoGame = exec(
             http("Get Video Game")
                     .get("/videogames/#{gameId}")
@@ -64,7 +66,7 @@ public class ApiSimulationAverageLoad extends Simulation {
                     .check(jsonPath("$.data.title").is("Battlefield"))
     );
 
-    // Define the scenario by chaining together the test steps
+    // Define the scenario by chaining together the above steps
     private final ScenarioBuilder scn = scenario("Videogame Test-Average Load")
             .pace(10).during(60).on(
                     pause(1)
@@ -78,10 +80,10 @@ public class ApiSimulationAverageLoad extends Simulation {
             );
 
     {
-        // Set up the simulation with the scenario
+        // Set up the simulation with the scenario:
+        // Ramp up 10 users over 20 seconds
         setUp(
-                scn.injectOpen(rampUsers(10).during(20)) // Ramp up 10 users over 20 seconds
+                scn.injectOpen(rampUsers(10).during(20))
         ).protocols(httpProtocol);
     }
-
 }
