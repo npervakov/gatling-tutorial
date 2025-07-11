@@ -137,7 +137,16 @@ import io.gatling.javaapi.http.*;
         {
             // Set up the simulation with the scenario
             setUp(
-                    scn.injectOpen(rampUsers(25).during(300))
+                    scn.injectOpen(rampUsers(5).during(1),
+                            nothingFor(59),
+                            rampUsers(5).during(1),
+                            nothingFor(59),
+                            rampUsers(5).during(1),
+                            nothingFor(59),
+                            rampUsers(5).during(1),
+                            nothingFor(59),
+                            rampUsers(5).during(1)
+                    )
             ).protocols(httpProtocol);
         }
 
