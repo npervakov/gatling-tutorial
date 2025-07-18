@@ -107,7 +107,6 @@ public class ApiSimulation extends Simulation {
                     .check(status().is(200))
                     .check(jsonPath("$.data.title").is("CFM Test Gamewww"))
     );
-
     // Update Game A
     private final ChainBuilder updateGameA = exec(
             http("=====Update Game A=====")
