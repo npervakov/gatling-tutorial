@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 // Websites
 // http://qa-testing.in.devexperts.com:7641/    //Create login users
 // http://qa-testing.in.devexperts.com:7641/swagger-ui/index.html#/Video%20Games/getAllVideoGames  // API
+// https://github.com/npervakov/gatling-tutorial/branches // GITHUB
 
 
 public class ApiSimulation extends Simulation {
