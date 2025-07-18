@@ -59,7 +59,7 @@ public class ApiSimulation extends Simulation {
           "publisher": "Test Publisher",
           "releaseYear": 2090,
           "genre": "Adventure",
-          "platform": "PlayStation 5 Specialwww", 
+          "platform": "PlayStation 5 Specialwww",
           "price": 99.99
         }
         """;
